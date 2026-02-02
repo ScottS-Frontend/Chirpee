@@ -6,7 +6,7 @@ import Profile from "./pages/Profile";
 import FollowingFeed from "./pages/FollowingFeed";
 import ProtectedRoute from "./components/ProtectedRoute";
 import TweetDetail from "./pages/TweetDetail";
-
+import Search from "./pages/Search";
 
 export default function App() {
   return (
@@ -22,6 +22,7 @@ export default function App() {
           <Route path="/u/:handle" element={<Profile />} />
           <Route path="/tweet/:tweetId" element={<TweetDetail/>}/>
           <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </div>
     </BrowserRouter>

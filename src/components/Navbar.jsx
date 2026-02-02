@@ -34,6 +34,7 @@ export default function Navbar() {
         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
           <Link to="/">Home</Link>
           <Link to="/following">Following</Link>
+          <Link to="/search">Search</Link>
           {user ? (
             <button className="btn secondary" onClick={() => signOut(auth)}>
               Logout
