@@ -1,0 +1,189 @@
+:root {
+  --bg: #ffffff;
+  --text: #111827;
+  --muted: rgba(17, 24, 39, 0.75);
+  --card: #ffffff;
+  --border: rgba(17, 24, 39, 0.12);
+  --accent: #4f46e5;
+
+  /* Buttons */
+  --btn-bg: #4f46e5;
+  --btn-text: #ffffff;
+
+  --btn2-bg: rgba(79, 70, 229, 0.10);
+  --btn2-text: #111827;
+  --btn2-border: rgba(17, 24, 39, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+html, body {
+  transition: background-color 220ms ease, color 220ms ease;
+}
+
+* {
+  transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease;
+}
+
+
+a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+}
+.btn {
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  font-weight: 800;
+  cursor: pointer;
+}
+.btn.secondary {
+  background: var(--btn2-bg);
+  color: var(--btn2-text);
+  border: 1px solid var(--btn2-border);
+}
+.input,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+}
+textarea {
+  resize: vertical;
+}
+.rowBetween {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+.stack {
+  display: grid;
+  gap: 12px;
+}
+.small {
+  font-size: 13px;
+  color: var(--muted);
+}
+hr.sep {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 10px 0;
+}
+
+.chirpee-heart {
+  display: inline-block;
+  transform-origin: center;
+  line-height: 1;
+}
+
+.chirpee-heart.is-liked {
+  animation: chirpee-heart-pop 220ms ease-out;
+}
+
+/* Dark Mode Override */
+:root[data-theme="dark"] {
+  --bg: #0b0f19;
+  --card: #121a2b;
+  --text: #e7ecff;
+  --muted: #aab4d4;
+  --accent: #7c5cff;
+  --danger: #ff4d6d;
+  --border: rgba(255, 255, 255, 0.1);
+
+  /* Buttons */
+  --btn-bg: #7c5cff;
+  --btn-text: #ffffff;
+
+  --btn2-bg: rgba(255, 255, 255, 0.08);
+  --btn2-text: #e7ecff;
+  --btn2-border: rgba(255, 255, 255, 0.18);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.small {
+  color: var(--muted);
+}
+
+/* Heart pop animation */
+@keyframes chirpee-heart-pop {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.35);
+  }
+  60% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+
+@keyframes chirpeeBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+
+

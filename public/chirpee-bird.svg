@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Body -->
+  <circle cx="64" cy="64" r="56" fill="#4F46E5"/>
+
+  <!-- Left Eye -->
+  <circle cx="48" cy="56" r="12" fill="white"/>
+  <circle cx="50" cy="58" r="6" fill="#111827"/>
+
+  <!-- Right Eye -->
+  <circle cx="80" cy="56" r="12" fill="white"/>
+  <circle cx="82" cy="58" r="6" fill="#111827"/>
+
+  <!-- Beak -->
+  <polygon points="64,66 74,76 54,76" fill="#F59E0B"/>
+
+  <!-- Tiny Wing -->
+  <ellipse cx="96" cy="76" rx="10" ry="6" fill="#4338CA" opacity="0.7"/>
+</svg>
