@@ -25,3 +25,15 @@ dist-ssr
 
 # Firebase admin keys
 scripts/serviceAccountKey.json
+
+# env
+.env
+.env.*
+!.env.example
+
+# firebase admin key (seed script)
+serviceAccountKey.json
+scripts/serviceAccountKey.json
+
+# logs
+*.log
