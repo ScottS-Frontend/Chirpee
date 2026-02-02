@@ -5,6 +5,10 @@ import path from "node:path";
 import os from "node:os";
 import crypto from "node:crypto";
 
+
+console.log("🔥 USING MAIN PROJECT seed.mjs");
+
+
 function requireEnv(name) {
   const v = process.env[name];
   if (!v) throw new Error(`Missing env var ${name}. Add it to .env.local`);
@@ -289,25 +293,29 @@ async function main() {
     }
 
     // Firestore user doc
+    const bio = pick([
+      "Building things one commit at a time.",
+      "Learning in public. Shipping often.",
+      "React • Firebase • Chirpee",
+      "Coffee powered developer ☕",
+      "Debugging is my cardio.",
+      "Currently building Chirpee 🚀",
+      "Small wins add up.",
+      "Frontend curious. Backend brave.",
+      "Trying to ship more than I scroll.",
+      "Making the internet slightly better.",
+    ]);
+
     await db.doc(`users/${uid}`).set(
       {
         uid,
         handle,
         displayName,
-        bio: pick([
-          "Building things one commit at a time.",
-          "Learning in public. Shipping often.",
-          "React • Firebase • Chirpee",
-          "Coffee powered developer ☕",
-          "Debugging is my cardio.",
-          "Currently building Chirpee 🚀",
-          "Small wins add up.",
-          "Frontend curious. Backend brave.",
-          "Trying to ship more than I scroll.",
-          "Making the internet slightly better.",
-        ]),
+        displayNameLower: displayName.toLowerCase(), // ⭐ ADD
+        bio,
+        bioLower: bio.toLowerCase(), // ⭐ ADD
         photoURL: profileImageURL,
-        photoPath: profileImagePath, // optional: you can seed avatar images later
+        photoPath: profileImagePath,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
       },
       { merge: true },
@@ -316,7 +324,8 @@ async function main() {
     // handles/{handle} -> { uid }
     await db.doc(`handles/${handle}`).set({ uid }, { merge: true });
 
-    users.push({ uid, handle, displayName, email });
+    users.push({ uid, handle, displayName, email, photoURL: profileImageURL });
+
   }
 
   // ---- Create follow graph (simple random) ----
@@ -359,19 +368,23 @@ async function main() {
   for (let i = 0; i < TWEETS; i++) {
     const author = faker.helpers.arrayElement(users);
 
-    const baseTweet = {
-      uid: author.uid,
-      handle: author.handle,
-      displayName: author.displayName,
-      photoURL: author.photoURL || "",
-      text: englishTweet(users),
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      likeCount: 0,
-      replyCount: 0,
-      retweetCount: 0,
-      imageURL: "",
-      imagePath: "",
-    };
+    const tweetText = englishTweet(users);
+
+const baseTweet = {
+  uid: author.uid,
+  handle: author.handle,
+  displayName: author.displayName,
+  photoURL: author.photoURL || "",
+  text: tweetText,
+  textLower: tweetText.toLowerCase(),
+  createdAt: admin.firestore.FieldValue.serverTimestamp(),
+  likeCount: 0,
+  replyCount: 0,
+  retweetCount: 0,
+  imageURL: "",
+  imagePath: "",
+};
+
 
     // ~35% of tweets get an image
     const withImage = Math.random() < 0.35;
@@ -417,12 +430,14 @@ async function main() {
       .collection("replies")
       .doc();
 
+    const replyText = englishReply(users);
+
     await replyRef.set({
-      text: englishReply(users),
+      text: replyText,
+      textLower: replyText.toLowerCase(), // ⭐ OPTIONAL
       uid: replier.uid,
       handle: replier.handle,
       displayName: replier.displayName,
-      photoURL: replier.photoURL || "",
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 

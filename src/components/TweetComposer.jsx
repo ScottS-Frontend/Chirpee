@@ -41,6 +41,7 @@ export default function TweetComposer() {
         displayName: profile?.displayName || "Unknown",
         photoURL: profile?.photoURL || "",
         text: trimmed,
+        textLower: trimmed.toLowerCase(),
         imageURL: imageURL || "",
         createdAt: serverTimestamp(),
         likeCount: 0,
